@@ -22,20 +22,22 @@ def load_image(name, colorkey=None):
     return image
 
 
-
 class MainCar(pygame.sprite.Sprite):
     size = (20, 20)
 
     def __init__(self, pos):
         super().__init__(all_sprites)
+        self.carcrash = False
         self.add(all_sprites)
         self.image = pygame.image.load('main_car.png').convert()
         self.rect = self.image.get_rect()
         self.rect.topleft = pos
 
     def update(self, *args):
-        if pygame.sprite.spritecollideany(self):
+        if pygame.sprite.spritecollideany(self, all_sprites):
             self.image = load_image('destroyed_main_car.png')
+            self.carcrash = True
+        if pygame.sprite.spritecollideany(self, borders):
             self.carcrash = True
 
 
