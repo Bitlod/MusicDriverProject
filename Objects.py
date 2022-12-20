@@ -1,7 +1,6 @@
 import pygame
 import os
 import sys
-import random
 
 all_sprites = pygame.sprite.Group()
 borders = pygame.sprite.Group()
@@ -22,24 +21,6 @@ def load_image(name, colorkey=None):
         image = image.convert_alpha()
     return image
 
-
-# class EnemyCar(pygame.sprite.Sprite):
-#     image = load_image('enemy_car.png')
-#     distance_height = [200, 400, 600, 800]
-#
-#     def __init__(self, *group):
-#         super().__init__(*group)
-#         self.image = EnemyCar.image
-#         self.rect = self.image.get_rect()
-#         self.rect.y = random.randint(self.distance_height[0], self.distance_height[3])
-#
-#     def update(self):
-#         self.rect = self.rect.move(random.randrange(3) - 1,
-#                                    random.randrange(3) - 1)
-
-
-# class Truck(EnemyCar):
-#     truck_image = load_image('truck.png')
 
 
 class MainCar(pygame.sprite.Sprite):
