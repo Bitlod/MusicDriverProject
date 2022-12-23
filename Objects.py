@@ -28,7 +28,7 @@ class Border(pygame.sprite.Sprite):
         super().__init__(all_sprites)
         self.add(all_sprites)
         self.image = pygame.Surface(Border.size)
-        self.image.fill(pygame.Color('#808080'))
+        self.image.fill(pygame.Color('gray'))
         self.rect = pygame.Rect(pos, Border.size)
 
 
