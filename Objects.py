@@ -3,7 +3,6 @@ import os
 import sys
 
 all_sprites = pygame.sprite.Group()
-borders = pygame.sprite.Group()
 
 
 def load_image(name, colorkey=None):
@@ -22,14 +21,12 @@ def load_image(name, colorkey=None):
     return image
 
 
-
-
 class Border(pygame.sprite.Sprite):
     size = (50, 10)
 
     def __init__(self, pos):
         super().__init__(all_sprites)
-        self.add(borders)
+        self.add(all_sprites)
         self.image = pygame.Surface(Border.size)
         self.image.fill(pygame.Color('#808080'))
         self.rect = pygame.Rect(pos, Border.size)
@@ -43,9 +40,10 @@ class Road(pygame.sprite.Sprite):
         self.add(all_sprites)
         self.image = pygame.image.load('sprites/road.png').convert()
         self.rect = self.image.get_rect()
+        self.rect.y = 350
 
     def update(self, *args):
-        self.rect.right += 1
+        self.rect.left -= 5
 
 
 class MainCar(pygame.sprite.Sprite):
@@ -65,4 +63,3 @@ class MainCar(pygame.sprite.Sprite):
     #         self.carcrash = True
     #     if pygame.sprite.spritecollideany(self, borders):
     #         self.carcrash = True
-
