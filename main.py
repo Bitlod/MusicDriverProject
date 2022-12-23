@@ -9,8 +9,9 @@ pygame.display.set_caption('MusicDriver')
 screen = pygame.display.set_mode(size)
 gameIcon = pygame.image.load('sprites/car_icon.png')
 pygame.display.set_icon(gameIcon)
-
+borders = Objects.borders
 decorations = Objects.decorations
+maincar = Objects.maincar
 cars = Objects.cars
 FPS = 30
 clock = pygame.time.Clock()
@@ -76,6 +77,8 @@ def start_screen():
 
 def main():
     i = 0
+    border1 = Objects.Border((0, 300))
+    border2 = Objects.Border((0, 600))
     MainCar = Objects.MainCar((0, 0))
     running = True
     carcrash = False
@@ -90,12 +93,20 @@ def main():
                 MainCar.rect.center = event.pos
             if event.type == pygame.AUDIO_ALLOW_ANY_CHANGE:
                 pass
+            if MainCar.update() == True:
+                carcrash = True
+        if carcrash is True:
+            road.rect.left = 0
         if road.rect.left == 0:
             road.rect.left = 200
             deadend.rect.left = road.rect.left - deadend.rect.size[1]
         screen.fill("#212621")
+        pygame.draw.rect(screen, 'gray', border1)
+        pygame.draw.rect(screen, 'gray', border2)
         decorations.update()
         decorations.draw(screen)
+        maincar.update()
+        maincar.draw(screen)
         cars.update()
         cars.draw(screen)
         clock.tick(FPS)
