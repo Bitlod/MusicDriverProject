@@ -1,3 +1,5 @@
+import random
+
 import pygame
 import Objects
 import sys
@@ -11,9 +13,9 @@ gameIcon = pygame.image.load('sprites/car_icon.png')
 pygame.display.set_icon(gameIcon)
 borders = Objects.borders
 decorations = Objects.decorations
-maincar = Objects.maincar
+maincar = Objects.main_car
 cars = Objects.cars
-FPS = 30
+FPS = 60
 clock = pygame.time.Clock()
 
 
@@ -84,22 +86,40 @@ def main():
     carcrash = False
     road = Objects.Road((0, 0))
     deadend = Objects.Road((0, 1200))
+
+    coords = [53, 118, 183, 248]
+    count = random.randint(1, 3)
+    enemies = []
+    for j in range(count):
+        enemy = Objects.EnemyCar((1000, 0), coords[random.randint(0, 3)])
+        enemies.append(enemy)
+
     while running:
         i += 1
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-            if event.type == pygame.MOUSEMOTION and carcrash is False:
+            if carcrash is False:
                 MainCar.rect.center = event.pos
             if event.type == pygame.AUDIO_ALLOW_ANY_CHANGE:
                 pass
-            if MainCar.update() == True:
+            if MainCar.update() is True:
                 carcrash = True
         if carcrash is True:
             road.rect.left = 0
+            for j in enemies:
+                j.stop()
         if road.rect.left == 0:
             road.rect.left = 200
             deadend.rect.left = road.rect.left - deadend.rect.size[1]
+
+        if enemies[0].rect.left == 0:
+            enemies.clear()
+            count = random.randint(1, 3)
+            for j in range(count):
+                enemy = Objects.EnemyCar((1000, 0), coords[random.randint(0, 3)])
+                enemies.append(enemy)
+
         screen.fill("#212621")
         pygame.draw.rect(screen, 'gray', border1)
         pygame.draw.rect(screen, 'gray', border2)
@@ -107,6 +127,8 @@ def main():
         decorations.draw(screen)
         maincar.update()
         maincar.draw(screen)
+        cars.update()
+        cars.draw(screen)
         cars.update()
         cars.draw(screen)
         clock.tick(FPS)
