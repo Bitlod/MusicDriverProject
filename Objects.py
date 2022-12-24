@@ -1,7 +1,8 @@
 import pygame
+import random
 
 decorations = pygame.sprite.Group()
-maincar = pygame.sprite.Group()
+main_car = pygame.sprite.Group()
 borders = pygame.sprite.Group()
 cars = pygame.sprite.Group()
 
@@ -17,10 +18,32 @@ class Border(pygame.sprite.Sprite):
         self.rect = pygame.Rect(pos, Border.size)
 
 
+class EnemyCar(pygame.sprite.Sprite):
+    def __init__(self, pos, x):
+        super().__init__(cars)
+        self.add(cars)
+
+        car = random.randint(0, 1)
+        if car == 0:
+            self.image = pygame.image.load('sprites/truck.png').convert_alpha()
+        else:
+            self.image = pygame.image.load('sprites/enemy_car.png').convert_alpha()
+
+        self.rect = self.image.get_rect()
+        self.rect.x = 1000
+        self.rect.y = 300 + x
+
+    def update(self, *args):
+        self.rect.left -= 5
+
+    def stop(self, *args):
+        self.rect.left += 10
+
+
 class MainCar(pygame.sprite.Sprite):
     def __init__(self, pos):
-        super().__init__(maincar)
-        self.add(maincar)
+        super().__init__(main_car)
+        self.add(main_car)
         self.image = pygame.image.load('sprites/main_car.png').convert_alpha()
         self.rect = self.image.get_rect()
         self.rect.x = 50
