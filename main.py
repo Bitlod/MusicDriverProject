@@ -99,7 +99,7 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-            if carcrash is False:
+            if event.type == pygame.MOUSEMOTION and carcrash is False:
                 MainCar.rect.center = event.pos
             if event.type == pygame.AUDIO_ALLOW_ANY_CHANGE:
                 pass
