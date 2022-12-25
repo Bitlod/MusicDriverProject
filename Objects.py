@@ -61,6 +61,8 @@ class MainCar(pygame.sprite.Sprite):
         if pygame.sprite.spritecollideany(self, cars) or pygame.sprite.spritecollideany(self, borders):
             self.image = pygame.image.load('sprites/destroyed_main_car.png').convert_alpha()
             return True
+        else:
+            return False
 
 
 class Road(pygame.sprite.Sprite):

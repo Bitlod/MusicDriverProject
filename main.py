@@ -83,10 +83,8 @@ def main():
     border2 = Objects.Border((0, 600))
     MainCar = Objects.MainCar((0, 0))
     running = True
-    carcrash = False
     road = Objects.Road((0, 0))
     deadend = Objects.Road((0, 1200))
-
     coords = [53, 118, 183, 248]
     count = random.randint(1, 3)
     enemies = []
@@ -99,13 +97,11 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-            if event.type == pygame.MOUSEMOTION and carcrash is False:
+            if event.type == pygame.MOUSEMOTION and MainCar.update() is False:
                 MainCar.rect.center = event.pos
             if event.type == pygame.AUDIO_ALLOW_ANY_CHANGE:
                 pass
-            if MainCar.update() is True:
-                carcrash = True
-        if carcrash is True:
+        if MainCar.update() is True:
             road.rect.left = 0
             for j in enemies:
                 j.stop()
