@@ -36,26 +36,29 @@ class EnemyCar(pygame.sprite.Sprite):
             super().__init__(cars4)
             self.add(cars4)
 
+        self.truck = False
         self.car = random.randint(0, 1)
         if self.car == 0:
             self.image = pygame.image.load('sprites/truck.png').convert_alpha()
             self.rect = self.image.get_rect()
             self.rect.x = random.randint(1500, 1900) + random.randint(-300, 400)
             self.rect.y = 295 + x
+            self.truck = True
         else:
             self.image = pygame.image.load('sprites/enemy_car.png').convert_alpha()
             self.rect = self.image.get_rect()
             self.rect.x = random.randint(1500, 1900) + random.randint(-300, 400)
             self.rect.y = 300 + x
+            self.truck = False
 
     def update(self, *args):
         self.rect.left -= 5
 
     def stop(self, *args):
         self.rect.x += 5
-        if pygame.sprite.spritecollideany(self, main_car) and self.car == 0:
+        if pygame.sprite.spritecollideany(self, main_car) and self.truck is False:
             self.image = pygame.image.load('sprites/destroyed_enemy_car.png').convert_alpha()
-        elif pygame.sprite.spritecollideany(self, main_car) and self.car == 1:
+        elif pygame.sprite.spritecollideany(self, main_car) and self.truck is True:
             self.image = pygame.image.load('sprites/destroyed_truck.png').convert_alpha()
 
 
