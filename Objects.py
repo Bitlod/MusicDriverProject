@@ -4,7 +4,10 @@ import random
 decorations = pygame.sprite.Group()
 main_car = pygame.sprite.Group()
 borders = pygame.sprite.Group()
-cars = pygame.sprite.Group()
+cars1 = pygame.sprite.Group()
+cars2 = pygame.sprite.Group()
+cars3 = pygame.sprite.Group()
+cars4 = pygame.sprite.Group()
 
 
 class Border(pygame.sprite.Sprite):
@@ -19,32 +22,40 @@ class Border(pygame.sprite.Sprite):
 
 
 class EnemyCar(pygame.sprite.Sprite):
-    def __init__(self, pos, x):
-        super().__init__(cars)
-        self.add(cars)
-        self.truck = False
-        car = random.randint(0, 1)
-        if car == 0:
+    def __init__(self, pos, x, cr):
+        if cr == 'c1':
+            super().__init__(cars1)
+            self.add(cars1)
+        if cr == 'c2':
+            super().__init__(cars2)
+            self.add(cars2)
+        if cr == 'c3':
+            super().__init__(cars3)
+            self.add(cars3)
+        if cr == 'c4':
+            super().__init__(cars4)
+            self.add(cars4)
+
+        self.car = random.randint(0, 1)
+        if self.car == 0:
             self.image = pygame.image.load('sprites/truck.png').convert_alpha()
-            self.truck = True
             self.rect = self.image.get_rect()
-            self.rect.x = 1000
+            self.rect.x = random.randint(1500, 1900) + random.randint(-300, 400)
             self.rect.y = 295 + x
         else:
             self.image = pygame.image.load('sprites/enemy_car.png').convert_alpha()
-            self.truck = False
             self.rect = self.image.get_rect()
-            self.rect.x = 1000
+            self.rect.x = random.randint(1500, 1900) + random.randint(-300, 400)
             self.rect.y = 300 + x
 
     def update(self, *args):
         self.rect.left -= 5
 
     def stop(self, *args):
-        self.rect.left += 10
-        if pygame.sprite.spritecollideany(self, main_car) and self.truck is False:
+        self.rect.x += 5
+        if pygame.sprite.spritecollideany(self, main_car) and self.car == 0:
             self.image = pygame.image.load('sprites/destroyed_enemy_car.png').convert_alpha()
-        elif pygame.sprite.spritecollideany(self, main_car) and self.truck is True:
+        elif pygame.sprite.spritecollideany(self, main_car) and self.car == 1:
             self.image = pygame.image.load('sprites/destroyed_truck.png').convert_alpha()
 
 
@@ -58,9 +69,21 @@ class MainCar(pygame.sprite.Sprite):
         self.rect.y = 420
 
     def update(self):
-        if pygame.sprite.spritecollideany(self, cars) or pygame.sprite.spritecollideany(self, borders):
+        if pygame.sprite.spritecollideany(self, cars1):
             self.image = pygame.image.load('sprites/destroyed_main_car.png').convert_alpha()
-            return True
+            return True, 'c1'
+        if pygame.sprite.spritecollideany(self, cars2):
+            self.image = pygame.image.load('sprites/destroyed_main_car.png').convert_alpha()
+            return True, 'c2'
+        if pygame.sprite.spritecollideany(self, cars3):
+            self.image = pygame.image.load('sprites/destroyed_main_car.png').convert_alpha()
+            return True, 'c3'
+        if pygame.sprite.spritecollideany(self, cars4):
+            self.image = pygame.image.load('sprites/destroyed_main_car.png').convert_alpha()
+            return True, 'c4'
+        if pygame.sprite.spritecollideany(self, borders):
+            self.image = pygame.image.load('sprites/destroyed_main_car.png').convert_alpha()
+            return True, 'b'
         else:
             return False
 
@@ -74,4 +97,4 @@ class Road(pygame.sprite.Sprite):
         self.rect.y = 350
 
     def update(self, *args):
-        self.rect.left -= 5
+        self.rect.left -= 3.5

@@ -14,7 +14,10 @@ pygame.display.set_icon(gameIcon)
 borders = Objects.borders
 decorations = Objects.decorations
 maincar = Objects.main_car
-cars = Objects.cars
+cars1 = Objects.cars1
+cars2 = Objects.cars2
+cars3 = Objects.cars3
+cars4 = Objects.cars4
 FPS = 60
 clock = pygame.time.Clock()
 
@@ -81,16 +84,26 @@ def main():
     i = 0
     border1 = Objects.Border((0, 300))
     border2 = Objects.Border((0, 600))
+
     MainCar = Objects.MainCar((0, 0))
+
     running = True
+
     road = Objects.Road((0, 0))
     deadend = Objects.Road((0, 1200))
+
+    # f
+
     coords = [53, 118, 183, 248]
-    count = random.randint(1, 3)
-    enemies = []
-    for j in range(count):
-        enemy = Objects.EnemyCar((1000, 0), coords[random.randint(0, 3)])
-        enemies.append(enemy)
+    enemies1 = []
+    enemies2 = []
+    enemies3 = []
+    enemies4 = []
+
+    enemies1.append(Objects.EnemyCar((), coords[0], 'c1'))
+    enemies2.append(Objects.EnemyCar((), coords[1], 'c2'))
+    enemies3.append(Objects.EnemyCar((), coords[2], 'c3'))
+    enemies4.append(Objects.EnemyCar((), coords[3], 'c4'))
 
     while running:
         i += 1
@@ -101,20 +114,36 @@ def main():
                 MainCar.rect.center = event.pos
             if event.type == pygame.AUDIO_ALLOW_ANY_CHANGE:
                 pass
-        if MainCar.update() is True:
+
+        if MainCar.update() == (True, 'c1'):
+            enemies1[0].stop()
             road.rect.left = 0
-            for j in enemies:
-                j.stop()
+        if MainCar.update() == (True, 'c2'):
+            enemies2[0].stop()
+            road.rect.left = 0
+        if MainCar.update() == (True, 'c3'):
+            enemies3[0].stop()
+            road.rect.left = 0
+        if MainCar.update() == (True, 'c4'):
+            enemies4[0].stop()
+            road.rect.left = 0
+
+        if MainCar.update() == (True, 'b'):
+            road.rect.left = 0
+
         if road.rect.left == 0:
             road.rect.left = 200
             deadend.rect.left = road.rect.left - deadend.rect.size[1]
 
-        if enemies[0].rect.left == 0:
-            enemies.clear()
-            count = random.randint(1, 3)
-            for j in range(count):
-                enemy = Objects.EnemyCar((1000, 0), coords[random.randint(0, 3)])
-                enemies.append(enemy)
+        print(enemies1[0].rect.x)
+        if enemies1[0].rect.x in range(-100, -50):
+            enemies1[0].rect.x = random.randint(1500, 1900) + random.randint(-300, 400)
+        if enemies2[0].rect.x in range(-100, -50):
+            enemies2[0].rect.x = random.randint(1500, 1900) + random.randint(-300, 400)
+        if enemies3[0].rect.x in range(-100, -50):
+            enemies3[0].rect.x = random.randint(1500, 1900) + random.randint(-300, 400)
+        if enemies4[0].rect.x in range(-100, -50):
+            enemies4[0].rect.x = random.randint(1500, 1900) + random.randint(-300, 400)
 
         screen.fill("#212621")
         pygame.draw.rect(screen, 'gray', border1)
@@ -123,10 +152,16 @@ def main():
         decorations.draw(screen)
         maincar.update()
         maincar.draw(screen)
-        cars.update()
-        cars.draw(screen)
-        cars.update()
-        cars.draw(screen)
+
+        cars1.update()
+        cars1.draw(screen)
+        cars2.update()
+        cars2.draw(screen)
+        cars3.update()
+        cars3.draw(screen)
+        cars4.update()
+        cars4.draw(screen)
+
         clock.tick(FPS)
         pygame.display.flip()
     pygame.quit()
