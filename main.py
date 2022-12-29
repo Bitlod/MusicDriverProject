@@ -105,6 +105,11 @@ def main():
     enemies3.append(Objects.EnemyCar((), coords[2], 'c3'))
     enemies4.append(Objects.EnemyCar((), coords[3], 'c4'))
 
+    if enemies1[0].rect.x - enemies2[0].rect.x <= 200 and enemies1[0].rect.x >= enemies2[0].rect.x:
+        enemies1[0].rect.x += 300
+    if enemies2[0].rect.x - enemies1[0].rect.x <= 200 and enemies2[0].rect.x >= enemies1[0].rect.x:
+        enemies2[0].rect.x += 300
+
     while running:
         i += 1
         for event in pygame.event.get():
@@ -144,6 +149,11 @@ def main():
             enemies3[0].rect.x = random.randint(1500, 1900) + random.randint(-300, 400)
         if enemies4[0].rect.x in range(-100, -50):
             enemies4[0].rect.x = random.randint(1500, 1900) + random.randint(-300, 400)
+
+        if enemies1[0].rect.x - enemies2[0].rect.x <= 200 and enemies1[0].rect.x >= enemies2[0].rect.x:
+            enemies1[0].rect.x += 300
+        if enemies2[0].rect.x - enemies1[0].rect.x <= 200 and enemies2[0].rect.x >= enemies1[0].rect.x:
+            enemies2[0].rect.x += 300
 
         screen.fill("#212621")
         pygame.draw.rect(screen, 'gray', border1)
