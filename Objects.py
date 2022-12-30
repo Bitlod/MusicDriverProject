@@ -2,6 +2,7 @@ import pygame
 import random
 
 decorations = pygame.sprite.Group()
+roads = pygame.sprite.Group()
 main_car = pygame.sprite.Group()
 borders = pygame.sprite.Group()
 cars1 = pygame.sprite.Group()
@@ -93,11 +94,64 @@ class MainCar(pygame.sprite.Sprite):
 
 class Road(pygame.sprite.Sprite):
     def __init__(self, pos):
-        super().__init__(decorations)
-        self.add(decorations)
+        super().__init__(roads)
+        self.add(roads)
         self.image = pygame.image.load('sprites/road.png').convert_alpha()
         self.rect = self.image.get_rect()
         self.rect.y = 350
 
     def update(self, *args):
         self.rect.left -= 3.5
+
+
+class UpperDec(pygame.sprite.Sprite):
+    pass
+    def __init__(self, pos):
+        super().__init__(decorations)
+        self.add(decorations)
+        self.dec = random.randint(0, 2)
+        if self.dec == 0:
+            self.image = pygame.image.load('sprites/lil_tree.png').convert_alpha()
+            self.rect = self.image.get_rect()
+            self.rect.x = random.randint(1500, 1900) + random.randint(-300, 400)
+            self.rect.y = random.randint(0, 100)
+        if self.dec == 1:
+            self.image = pygame.image.load('sprites/hrusevka.png').convert_alpha()
+            self.rect = self.image.get_rect()
+            self.rect.x = random.randint(1500, 1900) + random.randint(-300, 400)
+            self.rect.y = random.randint(0, 100)
+        if self.dec == 2:
+            self.image = pygame.image.load('sprites/house.png').convert_alpha()
+            self.rect = self.image.get_rect()
+            self.rect.x = random.randint(1500, 1900) + random.randint(-300, 400)
+            self.rect.y = random.randint(0, 100)
+
+    def update(self):
+        self.rect.left += 3.5
+
+
+class LowerDec(pygame.sprite.Sprite):
+    pass
+
+    def __init__(self, pos):
+        super().__init__(roads)
+        self.add(borders)
+        self.dec = random.randint(0, 2)
+        if self.dec == 0:
+            self.image = pygame.image.load('sprites/lil_tree.png').convert_alpha()
+            self.rect = self.image.get_rect()
+            self.rect.x = random.randint(1500, 1900) + random.randint(-300, 400)
+            self.rect.y = random.randint(500, 700)
+        if self.dec == 1:
+            self.image = pygame.image.load('sprites/hrusevka.png').convert_alpha()
+            self.rect = self.image.get_rect()
+            self.rect.x = random.randint(1500, 1900) + random.randint(-300, 400)
+            self.rect.y = random.randint(500, 700)
+        if self.dec == 2:
+            self.image = pygame.image.load('sprites/house.png').convert_alpha()
+            self.rect = self.image.get_rect()
+            self.rect.x = random.randint(1500, 1900) + random.randint(-300, 400)
+            self.rect.y = random.randint(500, 700)
+
+    def update(self):
+        self.rect.left += 3.5
