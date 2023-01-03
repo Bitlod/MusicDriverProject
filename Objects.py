@@ -55,11 +55,12 @@ class EnemyCar(pygame.sprite.Sprite):
         self.rect.left -= 5
         if pygame.sprite.spritecollideany(self, main_car) and self.truck is False:
             self.image = pygame.image.load('sprites/destroyed_enemy_car.png').convert_alpha()
-        elif pygame.sprite.spritecollideany(self, main_car) and self.truck is True:
+        if pygame.sprite.spritecollideany(self, main_car) and self.truck is True:
             self.image = pygame.image.load('sprites/destroyed_truck.png').convert_alpha()
 
     def stop(self, *args):
         self.rect.x += 5
+
 
 
 class MainCar(pygame.sprite.Sprite):
