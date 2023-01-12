@@ -112,8 +112,8 @@ def main():
 
     enemies1.append(Objects.EnemyCar((), coords[0], 'c1'))
     enemies2.append(Objects.EnemyCar((), coords[1], 'c2'))
-    enemies3.append(Objects.EnemyCar((), coords[2], 'c3'))
-    enemies4.append(Objects.EnemyCar((), coords[3], 'c4'))
+    enemies3.append(Objects.EnemyCar2((), coords[2], 'c3'))
+    enemies4.append(Objects.EnemyCar2((), coords[3], 'c4'))
 
     if enemies1[0].rect.x - enemies2[0].rect.x <= 200 and enemies1[0].rect.x >= enemies2[0].rect.x:
         enemies1[0].rect.x += 300
@@ -128,51 +128,53 @@ def main():
             if event.type == pygame.MOUSEMOTION and MainCar.update() is False:
                 MainCar.rect.center = event.pos
 
-            if event.type == pygame.AUDIO_ALLOW_ANY_CHANGE:
-                pass
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_e:
-                    gudok.play()
+            # Отдельная вкладка для мыши
+            if True:
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_e:
+                        gudok.play()
 
-            if event.type == pygame.KEYUP:
-                if event.key == pygame.K_e:
-                    gudok.stop()
+                if event.type == pygame.KEYUP:
+                    if event.key == pygame.K_e:
+                        gudok.stop()
 
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if event.button == 1:  # левая кнопка мыши
-                    pygame.mixer.music.pause()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if event.button == 1:  # левая кнопка мыши
+                        pygame.mixer.music.pause()
 
-                if event.button == 3:  # правая кнопка мыши
-                    pygame.mixer.music.unpause()
+                    if event.button == 3:  # правая кнопка мыши
+                        pygame.mixer.music.unpause()
 
-                if event.button == 2:  # средняя кнопка мыши
-                    pygame.mixer.music.load(f'{playlist[count]}')
-                    pygame.mixer.music.play()
+                    if event.button == 2:  # средняя кнопка мыши
+                        pygame.mixer.music.load(f'{playlist[count]}')
+                        pygame.mixer.music.play()
 
-                if event.button == 4:  # колесо вверх
-                    count += 1
-                    if count >= len(playlist):
-                        count = 0
-                    pygame.mixer.music.load(f'{playlist[count]}')
-                    pygame.mixer.music.play()
+                    if event.button == 4:  # колесо вверх
+                        count += 1
+                        if count >= len(playlist):
+                            count = 0
+                        pygame.mixer.music.load(f'{playlist[count]}')
+                        pygame.mixer.music.play()
 
-                if event.button == 5:  # колесо вниз
-                    count -= 1
-                    if count <= -1:
-                        count = len(playlist) - 1
-                    pygame.mixer.music.load(f'{playlist[count]}')
-                    pygame.mixer.music.play()
+                    if event.button == 5:  # колесо вниз
+                        count -= 1
+                        if count <= -1:
+                            count = len(playlist) - 1
+                        pygame.mixer.music.load(f'{playlist[count]}')
+                        pygame.mixer.music.play()
 
         # ---
 
         if MainCar.update() == (True, 'c1'):
             enemies1[0].stop()
+            enemies2[0].stop()
             road.rect.left = 0
             if music is not None:
                 music.play()
                 music = None
 
         if MainCar.update() == (True, 'c2'):
+            enemies1[0].stop()
             enemies2[0].stop()
             road.rect.left = 0
             if music is not None:
@@ -181,12 +183,14 @@ def main():
 
         if MainCar.update() == (True, 'c3'):
             enemies3[0].stop()
+            enemies4[0].stop()
             road.rect.left = 0
             if music is not None:
                 music.play()
                 music = None
 
         if MainCar.update() == (True, 'c4'):
+            enemies3[0].stop()
             enemies4[0].stop()
             road.rect.left = 0
             if music is not None:
@@ -195,6 +199,8 @@ def main():
 
         if MainCar.update() == (True, 'b'):
             road.rect.left = 0
+            enemies3[0].revert()
+            enemies4[0].revert()
             if tormoz is not None:
                 tormoz.play()
                 tormoz = None
@@ -202,20 +208,6 @@ def main():
         if road.rect.left == 0:
             road.rect.left = 200
             deadend.rect.left = road.rect.left - deadend.rect.size[1]
-
-        if enemies1[0].rect.x in range(-100, -50):
-            enemies1[0].rect.x = random.randint(1500, 1900) + random.randint(-300, 400)
-        if enemies2[0].rect.x in range(-100, -50):
-            enemies2[0].rect.x = random.randint(1500, 1900) + random.randint(-300, 400)
-        if enemies3[0].rect.x in range(-100, -50):
-            enemies3[0].rect.x = random.randint(1500, 1900) + random.randint(-300, 400)
-        if enemies4[0].rect.x in range(-100, -50):
-            enemies4[0].rect.x = random.randint(1500, 1900) + random.randint(-300, 400)
-
-        if enemies1[0].rect.x - enemies2[0].rect.x <= 200 and enemies1[0].rect.x >= enemies2[0].rect.x:
-            enemies1[0].rect.x += 300
-        if enemies2[0].rect.x - enemies1[0].rect.x <= 200 and enemies2[0].rect.x >= enemies1[0].rect.x:
-            enemies2[0].rect.x += 300
 
         screen.fill("#212621")
         pygame.draw.rect(screen, 'gray', border1)
