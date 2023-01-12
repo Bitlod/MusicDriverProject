@@ -87,7 +87,7 @@ def main():
     # музыка и звуки
     music = pygame.mixer.Sound('audio/avaria.mp3')
     tormoz = pygame.mixer.Sound('audio/tormoz.mp3')
-    gudok = pygame.mixer.Sound('audio/gudok.mp 3')
+    gudok = pygame.mixer.Sound('audio/gudok.mp3')
 
     playlist = ['soundtracks/1.mp3', 'soundtracks/2.mp3', 'soundtracks/3.mp3', 'soundtracks/4.mp3', 'soundtracks/5.mp3']
     count = 0
