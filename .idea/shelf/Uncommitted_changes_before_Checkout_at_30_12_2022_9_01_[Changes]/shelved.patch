@@ -1,0 +1,60 @@
+Index: main.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import random\r\n\r\nimport pygame\r\nimport Objects\r\nimport sys\r\nimport os\r\n\r\npygame.init()\r\nsize = (1200, 800)\r\npygame.display.set_caption('MusicDriver')\r\nscreen = pygame.display.set_mode(size)\r\ngameIcon = pygame.image.load('sprites/car_icon.png')\r\npygame.display.set_icon(gameIcon)\r\nborders = Objects.borders\r\ndecorations = Objects.decorations\r\nmaincar = Objects.main_car\r\ncars1 = Objects.cars1\r\ncars2 = Objects.cars2\r\ncars3 = Objects.cars3\r\ncars4 = Objects.cars4\r\nFPS = 60\r\nclock = pygame.time.Clock()\r\n\r\n\r\ndef load_image(name, colorkey=None):\r\n    fullname = os.path.join(name)\r\n    if not os.path.isfile(fullname):\r\n        print(f\"Файл с изображением '{fullname}' не найден\")\r\n        sys.exit()\r\n    image = pygame.image.load(fullname)\r\n    if colorkey is not None:\r\n        image = image.convert()\r\n        if colorkey == -1:\r\n            colorkey = image.get_at((0, 0))\r\n        image.set_colorkey(colorkey)\r\n    else:\r\n        image = image.convert_alpha()\r\n    return image\r\n\r\n\r\ndef terminate():\r\n    pygame.quit()\r\n    sys.exit()\r\n\r\n\r\ndef start_screen():\r\n    intro_text = [\"MusicDriver\", \"\",\r\n                  \"Правила игры\",\r\n                  \"Двигай мышкой и уворачивайся от мошын\",\r\n                  \"Не ударься в края дороги, они кусаются!\",\r\n                  \"спрайты не оч, но как умею\",\r\n                  \"приходится выводить их построчно\"\r\n                  '',\r\n                  '',\r\n                  '',\r\n                  'Нажми сюда']\r\n\r\n    fon = pygame.transform.scale(load_image('sprites/lil_tree.png'), size)\r\n    screen.blit(fon, (0, 0))\r\n    font = pygame.font.Font('shrift/Shrifty.ttf', 30)\r\n    text_coord = 100\r\n    for line in intro_text:\r\n        string_rendered = font.render(line, bool(1), pygame.Color('white'))\r\n        intro_rect = string_rendered.get_rect()\r\n        intro_rect.x = 10\r\n        text_coord += 10\r\n        intro_rect.top = text_coord\r\n        intro_rect.x = 10\r\n        text_coord += intro_rect.height\r\n        screen.blit(string_rendered, intro_rect)\r\n\r\n    while True:\r\n        for event in pygame.event.get():\r\n            if event.type == pygame.QUIT:\r\n                terminate()\r\n            elif event.type == pygame.KEYDOWN or \\\r\n                    event.type == pygame.MOUSEBUTTONDOWN:\r\n                return\r\n        pygame.display.flip()\r\n        clock.tick(FPS)\r\n\r\n\r\ndef main():\r\n    i = 0\r\n    border1 = Objects.Border((0, 300))\r\n    border2 = Objects.Border((0, 600))\r\n\r\n    MainCar = Objects.MainCar((0, 0))\r\n\r\n    running = True\r\n\r\n    road = Objects.Road((0, 0))\r\n    deadend = Objects.Road((0, 1200))\r\n\r\n    # f\r\n\r\n    coords = [53, 118, 183, 248]\r\n    enemies1 = []\r\n    enemies2 = []\r\n    enemies3 = []\r\n    enemies4 = []\r\n\r\n    enemies1.append(Objects.EnemyCar((), coords[0], 'c1'))\r\n    enemies2.append(Objects.EnemyCar((), coords[1], 'c2'))\r\n    enemies3.append(Objects.EnemyCar((), coords[2], 'c3'))\r\n    enemies4.append(Objects.EnemyCar((), coords[3], 'c4'))\r\n\r\n    if enemies1[0].rect.x - enemies2[0].rect.x <= 200 and enemies1[0].rect.x >= enemies2[0].rect.x:\r\n        enemies1[0].rect.x += 300\r\n    if enemies2[0].rect.x - enemies1[0].rect.x <= 200 and enemies2[0].rect.x >= enemies1[0].rect.x:\r\n        enemies2[0].rect.x += 300\r\n\r\n    while running:\r\n        i += 1\r\n        for event in pygame.event.get():\r\n            if event.type == pygame.QUIT:\r\n                running = False\r\n            if event.type == pygame.MOUSEMOTION and MainCar.update() is False:\r\n                MainCar.rect.center = event.pos\r\n            if event.type == pygame.AUDIO_ALLOW_ANY_CHANGE:\r\n                pass\r\n\r\n        if MainCar.update() == (True, 'c1'):\r\n            enemies1[0].stop()\r\n            road.rect.left = 0\r\n        if MainCar.update() == (True, 'c2'):\r\n            enemies2[0].stop()\r\n            road.rect.left = 0\r\n        if MainCar.update() == (True, 'c3'):\r\n            enemies3[0].stop()\r\n            road.rect.left = 0\r\n        if MainCar.update() == (True, 'c4'):\r\n            enemies4[0].stop()\r\n            road.rect.left = 0\r\n\r\n        if MainCar.update() == (True, 'b'):\r\n            road.rect.left = 0\r\n\r\n        if road.rect.left == 0:\r\n            road.rect.left = 200\r\n            deadend.rect.left = road.rect.left - deadend.rect.size[1]\r\n\r\n        print(enemies1[0].rect.x)\r\n        if enemies1[0].rect.x in range(-100, -50):\r\n            enemies1[0].rect.x = random.randint(1500, 1900) + random.randint(-300, 400)\r\n        if enemies2[0].rect.x in range(-100, -50):\r\n            enemies2[0].rect.x = random.randint(1500, 1900) + random.randint(-300, 400)\r\n        if enemies3[0].rect.x in range(-100, -50):\r\n            enemies3[0].rect.x = random.randint(1500, 1900) + random.randint(-300, 400)\r\n        if enemies4[0].rect.x in range(-100, -50):\r\n            enemies4[0].rect.x = random.randint(1500, 1900) + random.randint(-300, 400)\r\n\r\n        if enemies1[0].rect.x - enemies2[0].rect.x <= 200 and enemies1[0].rect.x >= enemies2[0].rect.x:\r\n            enemies1[0].rect.x += 300\r\n        if enemies2[0].rect.x - enemies1[0].rect.x <= 200 and enemies2[0].rect.x >= enemies1[0].rect.x:\r\n            enemies2[0].rect.x += 300\r\n\r\n        screen.fill(\"#212621\")\r\n        pygame.draw.rect(screen, 'gray', border1)\r\n        pygame.draw.rect(screen, 'gray', border2)\r\n        decorations.update()\r\n        decorations.draw(screen)\r\n        maincar.update()\r\n        maincar.draw(screen)\r\n\r\n        cars1.update()\r\n        cars1.draw(screen)\r\n        cars2.update()\r\n        cars2.draw(screen)\r\n        cars3.update()\r\n        cars3.draw(screen)\r\n        cars4.update()\r\n        cars4.draw(screen)\r\n\r\n        clock.tick(FPS)\r\n        pygame.display.flip()\r\n    pygame.quit()\r\n\r\n\r\nif __name__ == '__main__':\r\n    start_screen()\r\n    main()\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/main.py b/main.py
+--- a/main.py	
++++ b/main.py	
+@@ -1,5 +1,4 @@
+ import random
+-
+ import pygame
+ import Objects
+ import sys
+@@ -73,8 +72,7 @@
+         for event in pygame.event.get():
+             if event.type == pygame.QUIT:
+                 terminate()
+-            elif event.type == pygame.KEYDOWN or \
+-                    event.type == pygame.MOUSEBUTTONDOWN:
++            elif event.type == pygame.MOUSEBUTTONDOWN:
+                 return
+         pygame.display.flip()
+         clock.tick(FPS)
+@@ -140,7 +138,6 @@
+             road.rect.left = 200
+             deadend.rect.left = road.rect.left - deadend.rect.size[1]
+ 
+-        print(enemies1[0].rect.x)
+         if enemies1[0].rect.x in range(-100, -50):
+             enemies1[0].rect.x = random.randint(1500, 1900) + random.randint(-300, 400)
+         if enemies2[0].rect.x in range(-100, -50):
+@@ -156,13 +153,12 @@
+             enemies2[0].rect.x += 300
+ 
+         screen.fill("#212621")
+-        pygame.draw.rect(screen, 'gray', border1)
+-        pygame.draw.rect(screen, 'gray', border2)
++        borders.update()
++        borders.draw(screen)
+         decorations.update()
+         decorations.draw(screen)
+         maincar.update()
+         maincar.draw(screen)
+-
+         cars1.update()
+         cars1.draw(screen)
+         cars2.update()
+@@ -172,6 +168,9 @@
+         cars4.update()
+         cars4.draw(screen)
+ 
++
++
++
+         clock.tick(FPS)
+         pygame.display.flip()
+     pygame.quit()

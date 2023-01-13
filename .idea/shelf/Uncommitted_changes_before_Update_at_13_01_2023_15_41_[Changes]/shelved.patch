@@ -1,0 +1,283 @@
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/vcs.xml b/.idea/vcs.xml
+new file mode 100644
+--- /dev/null	(date 1672386793591)
++++ b/.idea/vcs.xml	(date 1672386793591)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="$PROJECT_DIR$" vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+new file mode 100644
+--- /dev/null	(date 1673613522434)
++++ b/.idea/workspace.xml	(date 1673613522434)
+@@ -0,0 +1,255 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="AutoImportSettings">
++    <option name="autoReloadType" value="SELECTIVE" />
++  </component>
++  <component name="ChangeListManager">
++    <list default="true" id="c801820d-30b7-4ff9-b4a5-04354abfc29c" name="Changes" comment="" />
++    <option name="SHOW_DIALOG" value="false" />
++    <option name="HIGHLIGHT_CONFLICTS" value="true" />
++    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
++    <option name="LAST_RESOLUTION" value="IGNORE" />
++  </component>
++  <component name="FileTemplateManagerImpl">
++    <option name="RECENT_TEMPLATES">
++      <list>
++        <option value="Python Script" />
++      </list>
++    </option>
++  </component>
++  <component name="Git.Settings">
++    <option name="RECENT_BRANCH_BY_REPOSITORY">
++      <map>
++        <entry key="$PROJECT_DIR$" value="Smirnov" />
++      </map>
++    </option>
++    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
++    <option name="RESET_MODE" value="HARD" />
++    <option name="UPDATE_TYPE" value="REBASE" />
++  </component>
++  <component name="MarkdownSettingsMigration">
++    <option name="stateVersion" value="1" />
++  </component>
++  <component name="ProjectId" id="2IzvnIEhdVHvp8uzEPv5D1c59bn" />
++  <component name="ProjectViewState">
++    <option name="hideEmptyMiddlePackages" value="true" />
++    <option name="showLibraryContents" value="true" />
++  </component>
++  <component name="PropertiesComponent">
++    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
++    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
++    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
++  </component>
++  <component name="RecentsManager">
++    <key name="CopyFile.RECENT_KEYS">
++      <recent name="C:\Users\gress\PycharmProjects\MusicDriverProject" />
++    </key>
++    <key name="MoveFile.RECENT_KEYS">
++      <recent name="C:\Users\gress\PycharmProjects\MusicDriverProject" />
++      <recent name="C:\Users\gress\PycharmProjects\MusicDriverProject\sprites" />
++    </key>
++  </component>
++  <component name="RunManager">
++    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
++      <option name="INTERPRETER_OPTIONS" value="" />
++      <option name="PARENT_ENVS" value="true" />
++      <envs>
++        <env name="PYTHONUNBUFFERED" value="1" />
++      </envs>
++      <option name="SDK_HOME" value="C:\Users\gress\AppData\Local\Programs\Python\Python310\python.exe" />
++      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
++      <option name="IS_MODULE_SDK" value="false" />
++      <option name="ADD_CONTENT_ROOTS" value="true" />
++      <option name="ADD_SOURCE_ROOTS" value="true" />
++      <module name="" />
++      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
++      <option name="PARAMETERS" value="" />
++      <option name="SHOW_COMMAND_LINE" value="false" />
++      <option name="EMULATE_TERMINAL" value="false" />
++      <option name="MODULE_MODE" value="false" />
++      <option name="REDIRECT_INPUT" value="false" />
++      <option name="INPUT_FILE" value="" />
++      <method v="2" />
++    </configuration>
++    <recent_temporary>
++      <list>
++        <item itemvalue="Python.main" />
++        <item itemvalue="Python.main" />
++        <item itemvalue="Python.main" />
++        <item itemvalue="Python.main" />
++        <item itemvalue="Python.main" />
++      </list>
++    </recent_temporary>
++  </component>
++  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
++  <component name="TaskManager">
++    <task active="true" id="Default" summary="Default task">
++      <changelist id="c801820d-30b7-4ff9-b4a5-04354abfc29c" name="Changes" comment="" />
++      <created>1671197391850</created>
++      <option name="number" value="Default" />
++      <option name="presentableId" value="Default" />
++      <updated>1671197391850</updated>
++    </task>
++    <task id="LOCAL-00001" summary="Добавлены спрайты для игры">
++      <created>1671546918594</created>
++      <option name="number" value="00001" />
++      <option name="presentableId" value="LOCAL-00001" />
++      <option name="project" value="LOCAL" />
++      <updated>1671546918594</updated>
++    </task>
++    <task id="LOCAL-00002" summary="Удалены лишние данные для оптимизации работы">
++      <created>1671547254864</created>
++      <option name="number" value="00002" />
++      <option name="presentableId" value="LOCAL-00002" />
++      <option name="project" value="LOCAL" />
++      <updated>1671547254864</updated>
++    </task>
++    <task id="LOCAL-00003" summary="Спрайты систематизированы в отдельную папку для упрощения взаимодействия с основными файлами. Оптимизирован файл Objects.py: исправлены некоторые баги в работе файла">
++      <created>1671547759863</created>
++      <option name="number" value="00003" />
++      <option name="presentableId" value="LOCAL-00003" />
++      <option name="project" value="LOCAL" />
++      <updated>1671547759863</updated>
++    </task>
++    <task id="LOCAL-00004" summary="Добавлен спрайт дороги; исправлен баг со спрайтом main_car">
++      <created>1671634274913</created>
++      <option name="number" value="00004" />
++      <option name="presentableId" value="LOCAL-00004" />
++      <option name="project" value="LOCAL" />
++      <updated>1671634274913</updated>
++    </task>
++    <task id="LOCAL-00005" summary="Нормализировано движение спрайта road.png. Спрайт смещён в итоговую позицию">
++      <created>1671795656076</created>
++      <option name="number" value="00005" />
++      <option name="presentableId" value="LOCAL-00005" />
++      <option name="project" value="LOCAL" />
++      <updated>1671795656076</updated>
++    </task>
++    <task id="LOCAL-00006" summary="Исправлено неверное отображение спрайта road.png">
++      <created>1671796026425</created>
++      <option name="number" value="00006" />
++      <option name="presentableId" value="LOCAL-00006" />
++      <option name="project" value="LOCAL" />
++      <updated>1671796026425</updated>
++    </task>
++    <task id="LOCAL-00007" summary="added new features">
++      <created>1671805258015</created>
++      <option name="number" value="00007" />
++      <option name="presentableId" value="LOCAL-00007" />
++      <option name="project" value="LOCAL" />
++      <updated>1671805258015</updated>
++    </task>
++    <task id="LOCAL-00008" summary="added 'borderdeath' mechanic">
++      <created>1671815206978</created>
++      <option name="number" value="00008" />
++      <option name="presentableId" value="LOCAL-00008" />
++      <option name="project" value="LOCAL" />
++      <updated>1671815206978</updated>
++    </task>
++    <task id="LOCAL-00009" summary="improved gameplay">
++      <created>1671909805700</created>
++      <option name="number" value="00009" />
++      <option name="presentableId" value="LOCAL-00009" />
++      <option name="project" value="LOCAL" />
++      <updated>1671909805700</updated>
++    </task>
++    <task id="LOCAL-00010" summary="improved gameplay">
++      <created>1671980076502</created>
++      <option name="number" value="00010" />
++      <option name="presentableId" value="LOCAL-00010" />
++      <option name="project" value="LOCAL" />
++      <updated>1671980076502</updated>
++    </task>
++    <task id="LOCAL-00011" summary="reduced some bugs">
++      <created>1672083229308</created>
++      <option name="number" value="00011" />
++      <option name="presentableId" value="LOCAL-00011" />
++      <option name="project" value="LOCAL" />
++      <updated>1672083229308</updated>
++    </task>
++    <task id="LOCAL-00012" summary="fixed bug with collision model">
++      <created>1672145148908</created>
++      <option name="number" value="00012" />
++      <option name="presentableId" value="LOCAL-00012" />
++      <option name="project" value="LOCAL" />
++      <updated>1672145148908</updated>
++    </task>
++    <task id="LOCAL-00013" summary="попытка реализовать декорации, но почему то они создаются только при проигрыше">
++      <created>1672383708191</created>
++      <option name="number" value="00013" />
++      <option name="presentableId" value="LOCAL-00013" />
++      <option name="project" value="LOCAL" />
++      <updated>1672383708191</updated>
++    </task>
++    <task id="LOCAL-00014" summary="попытка реализовать декорации, но почему то они создаются только при проигрыше&#10;upd: в прошлом коммите был баг с дорогой">
++      <created>1672383908114</created>
++      <option name="number" value="00014" />
++      <option name="presentableId" value="LOCAL-00014" />
++      <option name="project" value="LOCAL" />
++      <updated>1672383908114</updated>
++    </task>
++    <task id="LOCAL-00015" summary="попытка реализовать декорации, но почему то они создаются только при проигрыше&#10;upd: в прошлом коммите был баг с дорогой">
++      <created>1672383942395</created>
++      <option name="number" value="00015" />
++      <option name="presentableId" value="LOCAL-00015" />
++      <option name="project" value="LOCAL" />
++      <updated>1672383942395</updated>
++    </task>
++    <task id="LOCAL-00016" summary="попытка реализовать декорации, но почему то они создаются только при проигрыше&#10;upd: в прошлом коммите был баг с дорогой">
++      <created>1672386809392</created>
++      <option name="number" value="00016" />
++      <option name="presentableId" value="LOCAL-00016" />
++      <option name="project" value="LOCAL" />
++      <updated>1672386809392</updated>
++    </task>
++    <task id="LOCAL-00017" summary="попытка реализовать декорации + папка audio для последующих звуков игры">
++      <created>1672388868812</created>
++      <option name="number" value="00017" />
++      <option name="presentableId" value="LOCAL-00017" />
++      <option name="project" value="LOCAL" />
++      <updated>1672388868812</updated>
++    </task>
++    <option name="localTasksCounter" value="18" />
++    <servers />
++  </component>
++  <component name="Vcs.Log.Tabs.Properties">
++    <option name="TAB_STATES">
++      <map>
++        <entry key="MAIN">
++          <value>
++            <State>
++              <option name="FILTERS">
++                <map>
++                  <entry key="branch">
++                    <value>
++                      <list>
++                        <option value="Smirnov" />
++                      </list>
++                    </value>
++                  </entry>
++                </map>
++              </option>
++            </State>
++          </value>
++        </entry>
++      </map>
++    </option>
++  </component>
++  <component name="VcsManagerConfiguration">
++    <MESSAGE value="Добавлены спрайты для игры" />
++    <MESSAGE value="Удалены лишние данные для оптимизации работы" />
++    <MESSAGE value="Спрайты систематизированы в отдельную папку для упрощения взаимодействия с основными файлами. Оптимизирован файл Objects.py: исправлены некоторые баги в работе файла" />
++    <MESSAGE value="Добавлен спрайт дороги; исправлен баг со спрайтом main_car" />
++    <MESSAGE value="Нормализировано движение спрайта road.png. Спрайт смещён в итоговую позицию" />
++    <MESSAGE value="Исправлено неверное отображение спрайта road.png" />
++    <MESSAGE value="added new features" />
++    <MESSAGE value="added 'borderdeath' mechanic" />
++    <MESSAGE value="improved gameplay" />
++    <MESSAGE value="reduced some bugs" />
++    <MESSAGE value="fixed bug with collision model" />
++    <MESSAGE value="попытка реализовать декорации, но почему то они создаются только при проигрыше" />
++    <MESSAGE value="попытка реализовать декорации, но почему то они создаются только при проигрыше&#10;upd: в прошлом коммите был баг с дорогой" />
++    <MESSAGE value="попытка реализовать декорации + папка audio для последующих звуков игры" />
++    <option name="LAST_COMMIT_MESSAGE" value="попытка реализовать декорации + папка audio для последующих звуков игры" />
++  </component>
++</project>
+\ No newline at end of file
