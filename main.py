@@ -131,15 +131,33 @@ def main():
 
     # ---
 
+    #  координаты машиныю нужно чтобы она перемещалась по полосам, иначе игра сильно багается
+    coords1 = [-12, 53, 118, 183, 248, 313]
+    MainCar.rect.y = 300 + coords1[2]
+    MainCar.rect.x = 250
+    coords_count = 2
+
     running = True
     while running:
+        if MainCar.update() is not False:
+            pygame.mixer.music.stop()
         for event in pygame.event.get():
             # выход из программы
             if event.type == pygame.QUIT:
                 running = False
             # движение машины за курсором
-            if event.type == pygame.MOUSEMOTION and MainCar.update() is False:
-                MainCar.rect.center = event.pos
+            #  if event.type == pygame.MOUSEMOTION and MainCar.update() is False:
+                #  MainCar.rect.center = event.pos
+
+            if event.type == pygame.KEYDOWN and MainCar.update() is False:
+                if event.key == pygame.K_s:
+                    if coords_count < 5:
+                        coords_count += 1
+                    MainCar.rect.y = 300 + coords1[coords_count]
+                if event.key == pygame.K_w:
+                    if coords_count >= 0:
+                        coords_count -= 1
+                    MainCar.rect.y = 300 + coords1[coords_count]
 
             # Отдельная вкладка для мыши
             if True:
@@ -191,7 +209,6 @@ def main():
         # и какую музыку включить
         if MainCar.update() == (True, 'c1'):
             enemies1[0].stop()
-            enemies2[0].stop()
             enemies3[0].revert()
             enemies4[0].revert()
             road.rect.left = 0
@@ -200,7 +217,6 @@ def main():
                 music = None
 
         if MainCar.update() == (True, 'c2'):
-            enemies1[0].stop()
             enemies2[0].stop()
             enemies3[0].revert()
             enemies4[0].revert()
@@ -211,15 +227,15 @@ def main():
 
         if MainCar.update() == (True, 'c3'):
             enemies3[0].stop()
-            enemies4[0].stop()
+            enemies4[0].revert()
             road.rect.left = 0
             if music is not None:
                 music.play()
                 music = None
 
         if MainCar.update() == (True, 'c4'):
-            enemies3[0].stop()
             enemies4[0].stop()
+            enemies3[0].revert()
             road.rect.left = 0
             if music is not None:
                 music.play()
