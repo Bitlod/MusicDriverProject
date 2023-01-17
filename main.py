@@ -1,9 +1,9 @@
-import random
-
 import pygame
 import Objects
 import sys
 import os
+import pymorphy3
+from time import sleep
 
 pygame.init()
 size = (1200, 800)
@@ -20,6 +20,7 @@ cars3 = Objects.cars3
 cars4 = Objects.cars4
 FPS = 60
 clock = pygame.time.Clock()
+end_points = 0
 
 
 # загрузить картинку для чего-либо
@@ -83,6 +84,63 @@ def start_screen():
         clock.tick(FPS)
 
 
+def end_screen():
+    intro_text = ['',
+                  '',
+                  '',
+                  '',
+                  '',
+                  '',
+                  '',
+                  "                GAME OVER"
+                  '',
+                  '',
+                  '',
+                  '',
+                  '',
+                  '',
+                  '',
+                  '',
+                  '',
+                  'Нажми сюда чтобы выйти']
+
+    screen.fill('black')
+    font = pygame.font.Font('shrift/Shrifty.ttf', 30)
+    text_coord = 100
+    for line in intro_text:
+        string_rendered = font.render(line, bool(1), pygame.Color('white'))
+        intro_rect = string_rendered.get_rect()
+        intro_rect.x = 10
+        text_coord += 10
+        intro_rect.top = text_coord
+        intro_rect.x = 10
+        text_coord += intro_rect.height
+        screen.blit(string_rendered, intro_rect)
+        pygame.display.flip()
+        clock.tick(FPS)
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                terminate()
+            elif event.type == pygame.KEYDOWN or \
+                    event.type == pygame.MOUSEBUTTONDOWN:
+                terminate()
+
+        global end_points
+        morph = pymorphy3.MorphAnalyzer()
+        comment = morph.parse('очко')[0]
+        string_rendered = font.render(f'{end_points} {comment.make_agree_with_number(end_points).word}', bool(1),
+                                      pygame.Color('blue'))
+        intro_rect = string_rendered.get_rect()
+        intro_rect.x = 850
+        intro_rect.y = 750
+
+        screen.blit(string_rendered, intro_rect)
+        pygame.display.flip()
+        clock.tick(FPS)
+
+
 def main():
     # музыка и звуки
     music = pygame.mixer.Sound('audio/avaria.mp3')
@@ -137,17 +195,40 @@ def main():
     MainCar.rect.x = 250
     coords_count = 2
 
+    # очки
+    morph = pymorphy3.MorphAnalyzer()
+    comment = morph.parse('очко')[0]
+    font = pygame.font.Font('shrift/Shrifty.ttf', 30)
+    counts = 0
+    xxx = 0
+
     running = True
     while running:
+        counts += 1
+        if counts % 10 == 0:
+            xxx += 7
+        string_rendered = font.render(f'{xxx} {comment.make_agree_with_number(xxx).word}', bool(1),
+                                      pygame.Color('white'))
+        intro_rect = string_rendered.get_rect()
+        intro_rect.x = 900
+        intro_rect.y = 20
+
         if MainCar.update() is not False:
             pygame.mixer.music.stop()
         for event in pygame.event.get():
             # выход из программы
             if event.type == pygame.QUIT:
                 running = False
+            if MainCar.update() is not False:
+                pygame.mixer.music.stop()
+                sleep(1)
+                return
             # движение машины за курсором
             #  if event.type == pygame.MOUSEMOTION and MainCar.update() is False:
-                #  MainCar.rect.center = event.pos
+            #  MainCar.rect.center = event.pos
+
+            if event.type == pygame.MOUSEMOTION and MainCar.update() is False:
+                MainCar.rect.center = event.pos
 
             if event.type == pygame.KEYDOWN and MainCar.update() is False:
                 if event.key == pygame.K_s:
@@ -277,7 +358,9 @@ def main():
         cars4.draw(screen)
 
         # ---
-
+        screen.blit(string_rendered, intro_rect)
+        global end_points
+        end_points = xxx
         clock.tick(FPS)
         pygame.display.flip()
     pygame.quit()
@@ -286,3 +369,4 @@ def main():
 if __name__ == '__main__':
     start_screen()
     main()
+    end_screen()
