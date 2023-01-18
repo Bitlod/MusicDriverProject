@@ -10,6 +10,18 @@ cars2 = pygame.sprite.Group()
 cars3 = pygame.sprite.Group()
 cars4 = pygame.sprite.Group()
 
+decor1 = pygame.sprite.Group()
+decor2 = pygame.sprite.Group()
+decor3 = pygame.sprite.Group()
+decor4 = pygame.sprite.Group()
+
+light1 = pygame.sprite.Group()
+light2 = pygame.sprite.Group()
+light3 = pygame.sprite.Group()
+light4 = pygame.sprite.Group()
+light5 = pygame.sprite.Group()
+light6 = pygame.sprite.Group()
+
 
 # класс границы дороги (сверху и снизу, чтоб не ехать по траве)
 class Border(pygame.sprite.Sprite):
@@ -184,3 +196,187 @@ class Road(pygame.sprite.Sprite):
     # движение дороги
     def update(self, *args):
         self.rect.left -= 5
+
+
+class Decor(pygame.sprite.Sprite):
+    def __init__(self, rand, x, clas):
+        self.object = rand
+
+        if clas == 0:
+            super().__init__(decor2)
+            self.add(decor2)
+            # ---
+
+            if self.object == 0:
+                self.image = pygame.image.load('sprites/house.png').convert_alpha()
+                self.rect = self.image.get_rect()
+                self.rect.x = random.randint(1500, 1900) + random.randint(-300, 400)
+                self.rect.y = 30
+
+            elif self.object == 1:
+                self.image = pygame.image.load('sprites/hrusevka.png').convert_alpha()
+                self.rect = self.image.get_rect()
+                self.rect.x = random.randint(1500, 1900) + random.randint(-300, 400)
+                self.rect.y = 30
+
+            elif self.object == 2:
+                self.image = pygame.image.load('sprites/lil_tree.png').convert_alpha()
+                self.rect = self.image.get_rect()
+                self.rect.x = random.randint(1500, 1900) + random.randint(-300, 400)
+                self.rect.y = 30
+
+        if clas == 1:
+            super().__init__(decor2)
+            self.add(decor2)
+            # ---
+
+            if self.object == 0:
+                self.image = pygame.image.load('sprites/house.png').convert_alpha()
+                self.rect = self.image.get_rect()
+                self.rect.x = random.randint(1500, 1900) + random.randint(-300, 400)
+                self.rect.y = 130
+
+            elif self.object == 1:
+                self.image = pygame.image.load('sprites/hrusevka.png').convert_alpha()
+                self.rect = self.image.get_rect()
+                self.rect.x = random.randint(1500, 1900) + random.randint(-300, 400)
+                self.rect.y = 130
+
+            elif self.object == 2:
+                self.image = pygame.image.load('sprites/lil_tree.png').convert_alpha()
+                self.rect = self.image.get_rect()
+                self.rect.x = random.randint(1500, 1900) + random.randint(-300, 400)
+                self.rect.y = 130
+
+        if clas == 2:
+            super().__init__(decor3)
+            self.add(decor3)
+            # ---
+
+            if self.object == 0:
+                self.image = pygame.image.load('sprites/house.png').convert_alpha()
+                self.rect = self.image.get_rect()
+                self.rect.x = random.randint(1500, 1900) + random.randint(-300, 400)
+                self.rect.y = 230
+
+            elif self.object == 1:
+                self.image = pygame.image.load('sprites/hrusevka.png').convert_alpha()
+                self.rect = self.image.get_rect()
+                self.rect.x = random.randint(1500, 1900) + random.randint(-300, 400)
+                self.rect.y = 230
+
+            elif self.object == 2:
+                self.image = pygame.image.load('sprites/lil_tree.png').convert_alpha()
+                self.rect = self.image.get_rect()
+                self.rect.x = random.randint(1500, 1900) + random.randint(-300, 400)
+                self.rect.y = 230
+
+        if clas == 3:
+            super().__init__(decor4)
+            self.add(decor4)
+
+            # ---
+
+            if self.object == 0:
+                self.image = pygame.image.load('sprites/house.png').convert_alpha()
+                self.rect = self.image.get_rect()
+                self.rect.x = random.randint(1500, 1900) + random.randint(-300, 400)
+                self.rect.y = 700
+
+            elif self.object == 1:
+                self.image = pygame.image.load('sprites/hrusevka.png').convert_alpha()
+                self.rect = self.image.get_rect()
+                self.rect.x = random.randint(1500, 1900) + random.randint(-300, 400)
+                self.rect.y = 700
+
+            elif self.object == 2:
+                self.image = pygame.image.load('sprites/lil_tree.png').convert_alpha()
+                self.rect = self.image.get_rect()
+                self.rect.x = random.randint(1500, 1900) + random.randint(-300, 400)
+                self.rect.y = 700
+
+    # функция обновления (передвижение врага)
+    def update(self, rand):
+        self.rect.left -= 3
+
+        if self.rect.x in range(-100, -50):
+            self.rect.x = random.randint(1500, 1900) + random.randint(-300, 400)
+            self.object = random.randint(0, 2)
+
+
+class Light(pygame.sprite.Sprite):
+    def __init__(self, rand, x, clas):
+        self.object = rand
+        if clas == 4:
+
+            # ---
+
+            if self.object == 4:
+                super().__init__(light1)
+                self.add(light1)
+                self.image = pygame.image.load('sprites/light.png').convert_alpha()
+                self.rect = self.image.get_rect()
+                self.rect.x = 1500
+                self.rect.y = 280
+
+            if self.object == 5:
+                super().__init__(light2)
+                self.add(light2)
+                self.image = pygame.image.load('sprites/light.png').convert_alpha()
+                self.rect = self.image.get_rect()
+                self.rect.x = 1500
+                self.rect.y = 570
+
+            if self.object == 6:
+                super().__init__(light3)
+                self.add(light3)
+                self.image = pygame.image.load('sprites/light.png').convert_alpha()
+                self.rect = self.image.get_rect()
+                self.rect.x = 2100
+                self.rect.y = 280
+
+            if self.object == 7:
+                super().__init__(light4)
+                self.add(light4)
+                self.image = pygame.image.load('sprites/light.png').convert_alpha()
+                self.rect = self.image.get_rect()
+                self.rect.x = 2100
+                self.rect.y = 570
+
+            if self.object == 8:
+                super().__init__(light5)
+                self.add(light5)
+                self.image = pygame.image.load('sprites/light.png').convert_alpha()
+                self.rect = self.image.get_rect()
+                self.rect.x = 2700
+                self.rect.y = 280
+
+            if self.object == 9:
+                super().__init__(light6)
+                self.add(light6)
+                self.image = pygame.image.load('sprites/light.png').convert_alpha()
+                self.rect = self.image.get_rect()
+                self.rect.x = 2700
+                self.rect.y = 570
+
+    def update(self, rand):
+        self.rect.left -= 5
+
+        if self.rect.x in range(-100, -50):
+            if rand == 4:
+                self.rect.x = self.rect.x = 1500
+
+            if rand == 5:
+                self.rect.x = self.rect.x = 1500
+
+            if rand == 6:
+                self.rect.x = self.rect.x = 2100
+
+            if rand == 7:
+                self.rect.x = self.rect.x = 2100
+
+            if rand == 8:
+                self.rect.x = self.rect.x = 2700
+
+            if rand == 9:
+                self.rect.x = self.rect.x = 2700
