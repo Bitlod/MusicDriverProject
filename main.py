@@ -4,6 +4,7 @@ import sys
 import os
 import pymorphy3
 from time import sleep
+import random
 
 pygame.init()
 size = (1200, 800)
@@ -18,6 +19,19 @@ cars1 = Objects.cars1
 cars2 = Objects.cars2
 cars3 = Objects.cars3
 cars4 = Objects.cars4
+
+decor1 = Objects.decor1
+decor2 = Objects.decor2
+decor3 = Objects.decor3
+decor4 = Objects.decor4
+
+light1 = Objects.light1
+light2 = Objects.light2
+light3 = Objects.light3
+light4 = Objects.light4
+light5 = Objects.light5
+light6 = Objects.light6
+
 FPS = 60
 clock = pygame.time.Clock()
 end_points = 0
@@ -171,15 +185,24 @@ def main():
 
     coords = [53, 118, 183, 248]  # координаты полос
     # вражеские машины
-    enemies1 = []
-    enemies2 = []
-    enemies3 = []
-    enemies4 = []
+    enemies1 = [Objects.EnemyCar((), coords[0], 'c1')]
+    enemies2 = [Objects.EnemyCar((), coords[1], 'c2')]
+    enemies3 = [Objects.EnemyCar2((), coords[2], 'c3')]
+    enemies4 = [Objects.EnemyCar2((), coords[3], 'c4')]
 
-    enemies1.append(Objects.EnemyCar((), coords[0], 'c1'))
-    enemies2.append(Objects.EnemyCar((), coords[1], 'c2'))
-    enemies3.append(Objects.EnemyCar2((), coords[2], 'c3'))
-    enemies4.append(Objects.EnemyCar2((), coords[3], 'c4'))
+    decor_list1 = [Objects.Decor(random.randint(0, 2), 0, 0)]
+    decor_list2 = [Objects.Decor(random.randint(0, 2), 0, 1)]
+    decor_list3 = [Objects.Decor(random.randint(0, 2), 0, 2)]
+    decor_list4 = [Objects.Decor(random.randint(0, 2), 0, 3)]
+
+    decor_list5 = [Objects.Light(4, 0, 4)]
+    decor_list6 = [Objects.Light(5, 0, 4)]
+
+    decor_list7 = [Objects.Light(6, 0, 4)]
+    decor_list8 = [Objects.Light(7, 0, 4)]
+
+    decor_list9 = [Objects.Light(8, 0, 4)]
+    decor_list10 = [Objects.Light(9, 0, 4)]
 
     # проверка на возможность проезда между врагами
     if enemies1[0].rect.x - enemies2[0].rect.x <= 200 and enemies1[0].rect.x >= enemies2[0].rect.x:
@@ -289,46 +312,19 @@ def main():
         # далее проверка на то, где игрок проиграл (в какой полосе или у границы дороги) и тогда что нужно остановить
         # и какую музыку включить
         if MainCar.update() == (True, 'c1'):
-            enemies1[0].stop()
-            enemies3[0].revert()
-            enemies4[0].revert()
-            road.rect.left = 0
-            if music is not None:
-                music.play()
-                music = None
+            return
 
         if MainCar.update() == (True, 'c2'):
-            enemies2[0].stop()
-            enemies3[0].revert()
-            enemies4[0].revert()
-            road.rect.left = 0
-            if music is not None:
-                music.play()
-                music = None
+            return
 
         if MainCar.update() == (True, 'c3'):
-            enemies3[0].stop()
-            enemies4[0].revert()
-            road.rect.left = 0
-            if music is not None:
-                music.play()
-                music = None
+            return
 
         if MainCar.update() == (True, 'c4'):
-            enemies4[0].stop()
-            enemies3[0].revert()
-            road.rect.left = 0
-            if music is not None:
-                music.play()
-                music = None
+            return
 
         if MainCar.update() == (True, 'b'):
-            road.rect.left = 0
-            enemies3[0].revert()
-            enemies4[0].revert()
-            if tormoz is not None:
-                tormoz.play()
-                tormoz = None
+            return
 
         # ---
 
@@ -356,6 +352,28 @@ def main():
         cars3.draw(screen)
         cars4.update()
         cars4.draw(screen)
+
+        decor1.update(random.randint(0, 2))
+        decor1.draw(screen)
+        decor2.update(random.randint(0, 2))
+        decor2.draw(screen)
+        decor3.update(random.randint(0, 2))
+        decor3.draw(screen)
+        decor4.update(random.randint(0, 2))
+        decor4.draw(screen)
+
+        light1.update(4)
+        light1.draw(screen)
+        light2.update(5)
+        light2.draw(screen)
+        light3.update(6)
+        light3.draw(screen)
+        light4.update(7)
+        light4.draw(screen)
+        light5.update(8)
+        light5.draw(screen)
+        light6.update(9)
+        light6.draw(screen)
 
         # ---
         screen.blit(string_rendered, intro_rect)
