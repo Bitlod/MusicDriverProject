@@ -1,6 +1,6 @@
 import pygame
 import random
-
+# Файл с результатами
 # Группы спрайтов для всего
 decorations = pygame.sprite.Group()
 main_car = pygame.sprite.Group()
@@ -56,9 +56,9 @@ class EnemyCar(pygame.sprite.Sprite):
             self.add(cars4)
 
         # ---
-
         self.truck = False  # проверка на грузовик
         self.car = random.randint(0, 1)
+        self.speed = random.randint(5, 20)
         if self.car == 0:
             self.image = pygame.image.load('sprites/truck.png').convert_alpha()
             self.rect = self.image.get_rect()
@@ -74,7 +74,7 @@ class EnemyCar(pygame.sprite.Sprite):
 
     # функция обновления (передвижение врага)
     def update(self, *args):
-        self.rect.left -= 6
+        self.rect.left -= self.speed
         if pygame.sprite.spritecollideany(self, main_car) and self.truck is False:
             self.image = pygame.image.load('sprites/destroyed_enemy_car.png').convert_alpha()
 
@@ -85,8 +85,11 @@ class EnemyCar(pygame.sprite.Sprite):
             self.rect.x = random.randint(1500, 1900) + random.randint(-300, 400)
 
     # функция стопа (при столкновении)
-    def stop(self, *args):
-        self.rect.x += 6
+    def again(self, *args):
+        if self.rect.left == 0:
+            return True
+        else:
+            return False
 
 
 # класс нижних двух рядов вражеских машин
@@ -110,9 +113,9 @@ class EnemyCar2(pygame.sprite.Sprite):
             self.add(cars4)
 
         # ---
-
         self.truck = False
         self.car = random.randint(0, 1)
+        self.speed = random.randint(2, 10)
         if self.car == 0:
             self.image = pygame.image.load('sprites/truck2.png').convert_alpha()
             self.rect = self.image.get_rect()
@@ -127,7 +130,7 @@ class EnemyCar2(pygame.sprite.Sprite):
             self.truck = False
 
     def update(self, *args):
-        self.rect.left -= 4
+        self.rect.left += self.speed
         if pygame.sprite.spritecollideany(self, main_car) and self.truck is False:
             self.image = pygame.image.load('sprites/destroyed_enemy_car2.png').convert_alpha()
 
@@ -140,12 +143,11 @@ class EnemyCar2(pygame.sprite.Sprite):
         if self.rect.x in range(2350, 2500):
             self.rect.x = random.randint(-300, -100) + random.randint(-100, 100)
 
-    def stop(self, *args):
-        self.rect.x += 4
-
-    # функция передвижения при столкновении с другим рядом или границей для реалистичной скорости
-    def revert(self, *args):
-        self.rect.x += 8
+    def again(self, *args):
+        if self.rect.right == 0:
+            return True
+        else:
+            return False
 
 
 # класс главной машины
@@ -257,19 +259,19 @@ class Decor(pygame.sprite.Sprite):
                 self.image = pygame.image.load('sprites/house.png').convert_alpha()
                 self.rect = self.image.get_rect()
                 self.rect.x = random.randint(1500, 1900) + random.randint(-300, 400)
-                self.rect.y = 230
+                self.rect.y = 200
 
             elif self.object == 1:
                 self.image = pygame.image.load('sprites/hrusevka.png').convert_alpha()
                 self.rect = self.image.get_rect()
                 self.rect.x = random.randint(1500, 1900) + random.randint(-300, 400)
-                self.rect.y = 230
+                self.rect.y = 200
 
             elif self.object == 2:
                 self.image = pygame.image.load('sprites/lil_tree.png').convert_alpha()
                 self.rect = self.image.get_rect()
                 self.rect.x = random.randint(1500, 1900) + random.randint(-300, 400)
-                self.rect.y = 230
+                self.rect.y = 200
 
         if clas == 3:
             super().__init__(decor4)
@@ -281,19 +283,19 @@ class Decor(pygame.sprite.Sprite):
                 self.image = pygame.image.load('sprites/house.png').convert_alpha()
                 self.rect = self.image.get_rect()
                 self.rect.x = random.randint(1500, 1900) + random.randint(-300, 400)
-                self.rect.y = 700
+                self.rect.y = 800
 
             elif self.object == 1:
                 self.image = pygame.image.load('sprites/hrusevka.png').convert_alpha()
                 self.rect = self.image.get_rect()
                 self.rect.x = random.randint(1500, 1900) + random.randint(-300, 400)
-                self.rect.y = 700
+                self.rect.y = 800
 
             elif self.object == 2:
                 self.image = pygame.image.load('sprites/lil_tree.png').convert_alpha()
                 self.rect = self.image.get_rect()
                 self.rect.x = random.randint(1500, 1900) + random.randint(-300, 400)
-                self.rect.y = 700
+                self.rect.y = 800
 
     # функция обновления (передвижение врага)
     def update(self, rand):
